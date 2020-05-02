@@ -13,7 +13,8 @@ interface NotesDao{
     fun insert(notes: Notes)
 
     @Update
-    fun Update(notes: Notes)
+    fun updateNotes(notes: Notes)
+
     @Delete
     fun delete(notes: Notes)
 
