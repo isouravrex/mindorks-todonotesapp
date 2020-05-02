@@ -21,7 +21,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textStyle="bold"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/checkboxMarkStatus"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -36,6 +36,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
-
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:id="@+id/checkboxMarkStatus"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/textViewDescription"
+                app:layout_constraintTop_toTopOf="@id/textViewTitle"
+                android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
