@@ -29,6 +29,7 @@ import java.util.*
 class MyNotes : AppCompatActivity() {
      var fullname: String? =null
     lateinit var fabAddNotes: FloatingActionButton
+    val ADD_NOTES_CODE=100
 
     //    TextView textViewTitle,textViewDescription;
     lateinit var sharedPreferences: SharedPreferences
@@ -43,10 +44,13 @@ class MyNotes : AppCompatActivity() {
         getIntentData()
         setupRecyclerView()
 
+
         supportActionBar?.title = fullname
         fabAddNotes.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
-                setUpDialogbox()
+//                setUpDialogbox()
+                val intent = Intent(this@MyNotes,AddNotesActivity::class.java)
+                startActivityForResult(intent,ADD_NOTES_CODE)
 
             }
 
@@ -141,6 +145,18 @@ class MyNotes : AppCompatActivity() {
         recyclerViewNotes.layoutManager = linearLayoutManager
         recyclerViewNotes.adapter = noteAdapter
 
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val  title= data?.getStringExtra(AppConstant.TITLE)
+        val  description= data?.getStringExtra(AppConstant.DESCRIPTION)
+        val  imagePath= data?.getStringExtra(AppConstant.IMAGE_PATH)
+        val notes= Notes(title= title!!,description = description!!,imagePath = imagePath!!, isTaskCompleted = false)
+        addNotesToDb(notes)
+        notesList.add(notes)
+        recyclerViewNotes.adapter?.notifyItemChanged(notesList.size-1)
 
     }
 

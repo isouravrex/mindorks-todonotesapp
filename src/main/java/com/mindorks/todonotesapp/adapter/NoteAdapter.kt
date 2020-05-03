@@ -5,8 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.CompoundButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mindorks.todonotesapp.R
 import com.mindorks.todonotesapp.clicklisteners.ItemClickListener
 import com.mindorks.todonotesapp.db.Notes
@@ -25,6 +27,7 @@ class NoteAdapter(val listNotes: List<Notes>, val itemClickListener: ItemClickLi
         holder.textViewDescription.text = description
 
         holder.checkBoxMarkStatus.isChecked = notes.isTaskCompleted
+        Glide.with(holder.imageView).load(notes.imagePath).into(holder.imageView)
 
         holder.itemView.setOnClickListener { itemClickListener.onClick(notes) }
 
@@ -42,15 +45,11 @@ class NoteAdapter(val listNotes: List<Notes>, val itemClickListener: ItemClickLi
         return listNotes.size
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textViewTitle: TextView
-        val textViewDescription: TextView
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val textViewTitle: TextView= itemView.findViewById(R.id.textViewTitle)
+        val textViewDescription: TextView= itemView.findViewById(R.id.textViewDescription)
         val checkBoxMarkStatus: CheckBox= itemView.findViewById(R.id.checkboxMarkStatus)
-
-        init {
-            textViewTitle = itemView.findViewById(R.id.textViewTitle)
-            textViewDescription = itemView.findViewById(R.id.textViewDescription)
-        }
+        val imageView : ImageView = itemView.findViewById(R.id.imageView)
     }
 
 }

@@ -4,4 +4,5 @@ object AppConstant {
     val FULL_NAME = "full name"
     val TITLE = "title"
     val DESCRIPTION = "description"
+    val IMAGE_PATH = "image path"
 }
