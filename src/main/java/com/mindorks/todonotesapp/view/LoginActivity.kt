@@ -14,6 +14,7 @@ import com.google.android.material.button.MaterialButton
 import com.mindorks.todonotesapp.utils.AppConstant
 import com.mindorks.todonotesapp.utils.PrefConstant
 import com.mindorks.todonotesapp.R
+import com.mindorks.todonotesapp.utils.StotreSession
 
 class LoginActivity : AppCompatActivity() {
     lateinit var editTextFullName: EditText
@@ -45,18 +46,18 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun saveFullName(fullname: String) {
-        editor = sharedPreferences!!.edit()
-        editor.putString(PrefConstant.FULL_NAME, fullname)
-        editor.apply()
+//        editor = sharedPreferences!!.edit()
+        StotreSession.write(PrefConstant.FULL_NAME, fullname)
+//        editor.apply()
     }
 
     private fun saveLoginStatus() {
-        editor = sharedPreferences!!.edit()
-        editor.putBoolean(PrefConstant.IS_LOGGED_IN, true)
-        editor.apply()
+//        editor = sharedPreferences!!.edit()
+        StotreSession.write(PrefConstant.IS_LOGGED_IN, true)
+//        editor.apply()
     }
 
     private fun setupSharedPreferences() {
-        sharedPreferences = getSharedPreferences(PrefConstant.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE)
+        StotreSession.init(this)
     }
 }

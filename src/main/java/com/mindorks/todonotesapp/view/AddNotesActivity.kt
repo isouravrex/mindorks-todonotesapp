@@ -99,6 +99,10 @@ class AddNotesActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
+
     private fun setUpDialog() {
 
         val view = LayoutInflater.from(this).inflate(R.layout.dialog_selector,null)

@@ -1,5 +1,6 @@
 package com.mindorks.todonotesapp.view
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -168,13 +169,15 @@ class MyNotes : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val  title= data?.getStringExtra(AppConstant.TITLE)
-        val  description= data?.getStringExtra(AppConstant.DESCRIPTION)
-        val  imagePath= data?.getStringExtra(AppConstant.IMAGE_PATH)
-        val notes= Notes(title= title!!,description = description!!,imagePath = imagePath!!, isTaskCompleted = false)
-        addNotesToDb(notes)
-        notesList.add(notes)
-        recyclerViewNotes.adapter?.notifyItemChanged(notesList.size-1)
+        if(requestCode== ADD_NOTES_CODE && requestCode==Activity.RESULT_OK) {
+            val title = data?.getStringExtra(AppConstant.TITLE)
+            val description = data?.getStringExtra(AppConstant.DESCRIPTION)
+            val imagePath = data?.getStringExtra(AppConstant.IMAGE_PATH)
+            val notes = Notes(title = title!!, description = description!!, imagePath = imagePath!!, isTaskCompleted = false)
+            addNotesToDb(notes)
+            notesList.add(notes)
+            recyclerViewNotes.adapter?.notifyItemChanged(notesList.size - 1)
+        }
 
     }
 

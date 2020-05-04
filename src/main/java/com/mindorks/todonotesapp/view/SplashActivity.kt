@@ -13,6 +13,7 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.mindorks.todonotesapp.R
 import com.mindorks.todonotesapp.onboarding.OnBoardingActivity
 import com.mindorks.todonotesapp.utils.PrefConstant
+import com.mindorks.todonotesapp.utils.StotreSession
 
 
 class SplashActivity : AppCompatActivity() {
@@ -43,17 +44,20 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun setupSharedPreference() {
-        sharedPreferences = getSharedPreferences(PrefConstant.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE)
+//        sharedPreferences = getSharedPreferences(PrefConstant.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE)
+
+
+        StotreSession.init(this)
     }
 
     private fun checkLoginStatus() {
-        val isBoardingSuccess = sharedPreferences.getBoolean(PrefConstant.ON_BOARDED_SUCCESFULLY,false)
-        val isloggedin = sharedPreferences!!.getBoolean(PrefConstant.IS_LOGGED_IN, false)
-        if (isloggedin) {
+        val isBoardingSuccess = StotreSession.read(PrefConstant.ON_BOARDED_SUCCESFULLY)
+        val isloggedin = StotreSession.read(PrefConstant.IS_LOGGED_IN)
+        if (isloggedin!!) {
             val intent = Intent(this@SplashActivity, MyNotes::class.java)
             startActivity(intent)
         } else {
-            if(isBoardingSuccess) {
+            if(isBoardingSuccess!!) {
                 val intent = Intent(this@SplashActivity, LoginActivity::class.java)
                 startActivity(intent)
             }
@@ -62,5 +66,6 @@ class SplashActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+        finish()
     }
 }
