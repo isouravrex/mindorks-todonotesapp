@@ -22,20 +22,27 @@ class BlogsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_blogs)
+        Log.d(TAG,"blogWorking")
         bindViews()
         getBlogs()
     }
 
     private fun getBlogs() {
-        AndroidNetworking.get("https://www.mocky.io/v2/5926ce9d11000096006ccb30")
+        Log.d(TAG, "working Fine")
+
+        AndroidNetworking.get("http://www.mocky.io/v2/5926ce9d11000096006ccb30")
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsObject(JsonResponse::class.java,object : ParsedRequestListener<JsonResponse>{
                     override fun onResponse(response: JsonResponse?) {
+                        Log.d(TAG, "working ss Fine")
+
+
                         setupRecyclerView(response)
                     }
 
                     override fun onError(anError: ANError?) {
+                        Log.d(TAG, "working ee Fine")
                         Log.d(TAG, anError!!.localizedMessage)
 
                     }

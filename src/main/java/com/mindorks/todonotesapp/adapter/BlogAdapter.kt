@@ -26,7 +26,7 @@ class BlogAdapter(val list: List<Data>): RecyclerView.Adapter<BlogAdapter.ViewHo
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val blog = list[position]
-        Glide.with(holder.itemView).load(blog.image_url).into(holder.imageView)
+        Glide.with(holder.itemView).load(blog.img_url).into(holder.imageView)
         holder.textViewDescription.text =blog.description
         holder.textViewTitle.text=blog.title
     }
