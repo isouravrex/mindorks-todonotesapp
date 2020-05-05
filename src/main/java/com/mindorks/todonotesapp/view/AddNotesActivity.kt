@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.ContactsContract.Intents.Insert.ACTION
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -64,7 +65,6 @@ class AddNotesActivity : AppCompatActivity() {
                 intent.putExtra(AppConstant.IMAGE_PATH,picturePath)
                 setResult(Activity.RESULT_OK,intent)
                 finish()
-
             }
 
         })

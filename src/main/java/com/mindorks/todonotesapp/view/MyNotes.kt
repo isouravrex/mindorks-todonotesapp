@@ -38,6 +38,7 @@ class MyNotes : AppCompatActivity() {
      var fullname: String? =null
     lateinit var fabAddNotes: FloatingActionButton
     val ADD_NOTES_CODE=100
+    val TAG = "MyNotes"
 
     //    TextView textViewTitle,textViewDescription;
     lateinit var sharedPreferences: SharedPreferences
@@ -50,6 +51,7 @@ class MyNotes : AppCompatActivity() {
         getDataFromDatabase()
         bindView()
         getIntentData()
+        Log.d(TAG,"Fineeee")
         setupRecyclerView()
         setupWorkManager()
 
@@ -136,6 +138,8 @@ class MyNotes : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
+        Log.d(TAG,"RecyclerView Fine")
+
         val itemClickListener: ItemClickListener = object : ItemClickListener {
 
             override fun onUpdate(notes: Notes) {
@@ -169,7 +173,7 @@ class MyNotes : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode== ADD_NOTES_CODE && requestCode==Activity.RESULT_OK) {
+        if(requestCode== ADD_NOTES_CODE && resultCode==Activity.RESULT_OK) {
             val title = data?.getStringExtra(AppConstant.TITLE)
             val description = data?.getStringExtra(AppConstant.DESCRIPTION)
             val imagePath = data?.getStringExtra(AppConstant.IMAGE_PATH)
